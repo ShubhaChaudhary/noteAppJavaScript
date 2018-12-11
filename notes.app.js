@@ -1,24 +1,25 @@
-let notes = getNoteslocalstorage()
+let notes=[]
+notes.push(getNoteslocalstorage())
 let filter={
   search: ""
 }
+console.log(notes)
+document.querySelector("#make").addEventListener('click',function(e){
+   const noteid=uuidv4() 
+   notes.push({id:noteid ,title: '',body:''})
+   saveNotesLocalStorage(notes)
+   location.assign(`/note.html#${noteid}`)
+   updatedNotes(notes,filter)
+})
 
-document.querySelector("#input").addEventListener('submit',function(e){
-   e.preventDefault()
-   notes.push({id:uuidv4() ,title: e.target.elements.mynote.value,body:""})
-    saveNotesLocalStorage(notes)
-    updatedNotes(notes,filter)
-    e.target.elements.mynote.value=''
-   })
- updatedNotes(notes,filter)
 
  document.querySelector("#search-text").addEventListener('input',function(e){
     filter.search=e.target.value
-    updatedNotes(notes,filter)
+     updatedNotes(notes,filter)
  })
 
  document.querySelector("#del-but").addEventListener('click',function(e){
-       const paras= document.querySelectorAll(".note")
+       const paras= document.querySelectorAll(".addnote")
         paras.forEach(function(para) {
           para.remove()
         })
@@ -26,3 +27,4 @@ document.querySelector("#input").addEventListener('submit',function(e){
         notes=[] 
         updatedNotes(notes,filter)   
 })
+

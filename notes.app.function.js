@@ -35,7 +35,9 @@ let domElement=function(note){
     const div=document.createElement('div')
     const p1=document.createElement('span')
     const button= document.createElement('button')
-    div.className="note"
+    const a=document.createElement('a')
+    div.className="addnote"
+    
     // appending the button
     button.textContent="delete"
     button.addEventListener('click',function(e){
@@ -44,9 +46,11 @@ let domElement=function(note){
         updatedNotes(notes,filter)
     })
     div.appendChild(button)
-    // appending the notes
-note.title.length !=0? p1.textContent=note.title : p1.textContent='undefined note'
+    // APPENDING the anchor tag
+
+    a.setAttribute('href',`/note.html# ${note.id}`)
+note.title.length !=0? a.textContent=note.title : a.textContent='undefined note'
     
-    div.appendChild(p1)
+    div.appendChild(a)
     return div
 }
